@@ -10,6 +10,7 @@ import glob
 # WPS Format validation
 from pywps import Format
 from pywps.validator.mode import MODE
+from pywps.app.Common import Metadata
 
 __author__ = 'ajuracic'
 
