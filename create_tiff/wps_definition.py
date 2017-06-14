@@ -57,7 +57,7 @@ class CreateTiff(EO4AProcess):
             """,
             version='0.1',
             title="SSWind Sample Service: GeoTiff creation",
-            metadata=[Metadata('Conversion')]
+            metadata=[Metadata('Acquisition')]
             profile='',
             inputs=inputs,
             outputs=outputs,
