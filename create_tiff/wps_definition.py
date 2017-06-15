@@ -52,7 +52,6 @@ class CreateTiff(EO4AProcess):
 
         super(CreateTiff, self).__init__(
             identifier=os.path.basename(os.path.dirname(__file__)),
-            #'eo4a-sswind',
             abstract="""
             Sample GeoTiff generation service.
             """,
@@ -68,19 +67,15 @@ class CreateTiff(EO4AProcess):
     def get_command(self, request, response):
         """The service command. Do not do any processing here."""
         inputs = request.inputs
-        self.outdir = os.path.join(self.output_dir, "TiffExample")
-        self.mkdir_p(self.outdir)
+        #self.outdir = os.path.join(self.output_dir, "TiffExample")
+        #self.mkdir_p(self.outdir)
+        self.outdir = '/data_service/'
         return [
             "bash", "-x", "run_nc2tiff.sh", str(inputs['zipdir'][0].source), str(self.outdir)
         ]
 
     def set_output(self, request, response):
         """ Set the output path for the png file."""
-        # We use get_workflow_disk_path to get the path that other services
-        # can read from. /data_service is local to each service, but a read-
-        # only version exists in the workflow directory
-        workflow_disk_result_path = self.get_workflow_disk_path(
-            self.outdir
-        )
+        workflow_disk_result_path = self.get_workflow_disk_path(self.outdir)
         response.outputs['output_dir'].data = workflow_disk_result_path
         response.outputs['output_dir'].uom = UOM('unity')
