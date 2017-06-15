@@ -20,7 +20,7 @@ class CreateTiff(EO4AProcess):
 
     Parameters
     ----------
-    zipfile : input Sentinel zip file
+    zipdir : input Sentinel zip file
 
     Returns
     ----------
@@ -31,9 +31,9 @@ class CreateTiff(EO4AProcess):
         """Inputs and outputs for run_nc2tiff.sh sript."""
         inputs = [
             LiteralInput(
-                'zipfile', 'input zip file',
+                'zipdir', 'input zip path',
                 abstract="""
-                Input Sentinel 1 zip file.
+                Input Sentinel 1 zip file path.
                 """,
                 data_type='string',
                 min_occurs=1
@@ -71,7 +71,7 @@ class CreateTiff(EO4AProcess):
         self.outdir = os.path.join(self.output_dir, "TiffExample")
         self.mkdir_p(self.outdir)
         return [
-            "bash", "-x", "run_nc2tiff.sh", str(inputs['zipfile'][0].source), str(self.outdir)
+            "bash", "-x", "run_nc2tiff.sh", str(inputs['zipdir'][0].source), str(self.outdir)
         ]
 
     def set_output(self, request, response):

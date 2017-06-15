@@ -87,8 +87,8 @@ class SentinelDownload(EO4AProcess):
     def get_command(self, request, response):
         """The service command. Do not do any processing here."""
         inputs = request.inputs
-        self.sen1_dir = os.path.join(self.output_dir, "sen1")
-        self.mkdir_p(self.sen1_dir)
+        #self.sen1_dir = os.path.join(self.output_dir, "sen1")
+        #self.mkdir(self.sen1_dir)
         # Query, include only L2, OCN data
         self.query = "producttype=OCN"
         return [
@@ -96,15 +96,12 @@ class SentinelDownload(EO4AProcess):
             "-s", str(inputs['start_date'][0].source),
             "-e", str(inputs['end_date'][0].source),
             "-q", str(self.query),
-            "-p", self.sen1_dir,
             "ajuracic", "S1lj0M1k1!",
             inputs['search_polygon'][0].file
         ]
 
     def set_output(self, request, response):
         """Set the output from the WPS request."""
-        workflow_disk_result_path = self.get_workflow_disk_path(
-            self.sen1_dir
-        )
+        workflow_disk_result_path = self.get_workflow_disk_path('.')
         response.outputs['output_dir'].data = workflow_disk_result_path
         response.outputs['output_dir'].uom = UOM('unity')
