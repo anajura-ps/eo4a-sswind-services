@@ -8,7 +8,7 @@ export PYTHONPATH=".:PYTHONPATH"
 zipdir=$1
 outdir=$2
 
-for zipfile in $zipdir/*.zip
+for zipfile in $zipdir*.zip
 do
     unzip -o $zipfile -d /data_service/
 done
