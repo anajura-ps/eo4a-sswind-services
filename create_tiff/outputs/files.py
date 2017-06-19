@@ -172,9 +172,14 @@ def nc_to_tiff(varnames, ncfile, outfile):
     logger.info('(0,YSize) -> lon[0,0], lat[0,0]')
     logger.info('(XSize, YSize) -> lon[0,-1], lat[0,-1]')
     logger.info('Runing gdal_translate.')
+    outfile1 = './tmp.tiff'
     # Taken out from gdal command (error otherwise): -a_srs EPSG:%i 4326
-    command='gdal_translate -a_nodata %f -a_srs %s -gcp %i %i %f %f %f -gcp %i %i %f %f %f -gcp %i %i %f %f %f -gcp %i %i %f %f %f -of GTiff NETCDF:%s:%s %s' % (0.0, 'EPSG:4326', 0, 0, x[0], y[0], 0.00, nx, 0, x[1], y[1], 0.00, 0, ny, x[2], y[2], 0.0, nx, ny, x[3], y[3], 0.0, ncfile, varnames[2], outfile)
+    command='gdal_translate -a_nodata %f -a_srs %s -gcp %i %i %f %f %f -gcp %i %i %f %f %f -gcp %i %i %f %f %f -gcp %i %i %f %f %f -of GTiff NETCDF:%s:%s %s' % (0.0, 'EPSG:4326', 0, 0, x[0], y[0], 0.00, nx, 0, x[1], y[1], 0.00, 0, ny, x[2], y[2], 0.0, nx, ny, x[3], y[3], 0.0, ncfile, varnames[2], outfile1)
     run_command(command)
+    command1='gdalwarp -r near -order 1 -co COMPRESS=NONE -t_srs %s -dstalpha %s %s', 'EPSG:4326', outfile1, outfile
+    run_command(command1)
+    if os.path.exists(outfile1):
+        os.remove(outfile1)
     return;
 
 
