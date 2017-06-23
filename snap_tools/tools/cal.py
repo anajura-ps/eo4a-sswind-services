@@ -58,6 +58,7 @@ class Cal(EoToolProcess):
             """,
             version='0.1',
             title="calibration",
+            metadata=[Metadata('Preprocessing')],
             profile='',
             inputs=inputs,
             outputs=outputs,
