@@ -78,7 +78,7 @@ class SentinelDownload(EO4AProcess):
             """,
             version='0.1',
             title="Download Sentinel 1 Data (referencing data volume)",
-            metadata=[Metadata('Satellite.Sentinel1'), Metadata('Acquisition')],
+            metadata=[Metadata('Testing')],
             profile='',
             inputs=inputs,
             outputs=outputs,
