@@ -69,8 +69,8 @@ class Cal(EoToolProcess):
         """The service command. Do not do any processing here."""
         logger.info('Request inputs: %s', request.inputs)
 
-        return ['bash', '-c', '/opt/snap/bin/gpt Cal.xml %s %s' % (-Psrcfile=self._get_input(request, 'srcfile'),
-                                                                         -Pdstfile=self._get_input(request, 'dstfile'),
+        return ['bash', '-c', '/opt/snap/bin/gpt Cal.xml -Psrcfile=%s -Pdstfile=%s' % (self._get_input(request, 'srcfile'),
+                                                                                       self._get_input(request, 'dstfile'),
                                                         )
                 ]
 
